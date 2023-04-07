@@ -1,0 +1,39 @@
+<div class="flex flex-col w-11/12 m-auto">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="min-w-full text-left text-sm font-light">
+            <thead
+              class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+              <tr>
+                <th scope="col" class="px-6 py-4">#</th>
+                <th scope="col" class="px-6 py-4">Title</th>
+                <th scope="col" class="px-6 py-4">Text</th>
+                <th scope="col" class="px-6 py-4">Author</th>
+                <th scope="col" class="px-6 py-4">actions</th>
+              </tr>
+            </thead>
+
+
+            
+            <tbody>
+              <tr *ngFor="let blog of blogList;let indexOfelement=index;"
+              [ngClass]="indexOfelement % 2 ==0 ? 'bg-neutral-100' : 'bg-white'"
+              class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+                  <td class="whitespace-nowrap px-6 py-4 font-medium">{{blog._id.toString().substring(0,3)}}</td>
+                  <td class="whitespace-nowrap px-6 py-4">{{blog.title}}</td>
+                  <td class="whitespace-nowrap px-6 py-4">{{blog.body}}</td>
+                  <td class="whitespace-nowrap px-6 py-4">{{blog.author.name}}</td>
+                  <td class="whitespace-nowrap px-6 py-4 gap-2 flex">
+                      <button class="bg-red-600 text-white font-bold p-1 rounded-md" (click)="onDelete(blog._id.toString())">delete</button>
+                        <a class="bg-green-600 text-white font-bold p-1 rounded-md"
+                         [routerLink]="['/blogs/edit/', blog._id]">edit</a>
+                  </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

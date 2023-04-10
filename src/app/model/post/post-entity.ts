@@ -7,10 +7,10 @@ export interface IPost {
     text:string;
     rate:number;
     img:string;
-    date:string;
+    date:Date;
     isVisible:boolean;
-    documents:Array<DocumentEntity>;
-    comments:Array<CommentEntity>;
+    // documents:Array<DocumentEntity>;
+    // comments:Array<CommentEntity>;
     /*user:number;*/
 }
 
@@ -18,14 +18,14 @@ export class PostEntity implements IPost {
     id: number=0;
     title: string;
     text: string;
-   rate: number=0;
-   img: string="";
-   date:string="";
-   isVisible: boolean=false;
-   documents: Array<DocumentEntity>=[];
-   comments:Array<CommentEntity>=[];
+    rate: number=0;
+    img: string="";
+    date:Date;
+    isVisible: boolean=false;
+//    documents: Array<DocumentEntity>=[];
+//    comments:Array<CommentEntity>=[];
    /*  user: number=0;*/
-constructor(ti:string,te:string,r:number,img:string,date:string,isVisible:boolean){
+constructor(ti:string,te:string,r:number,img:string,date:Date,isVisible:boolean){
     this.text=te;
     this.title=ti;
     this.rate=r;
@@ -59,9 +59,9 @@ constructor(ti:string,te:string,r:number,img:string,date:string,isVisible:boolea
     public set setRate(value:number) {
         this.rate=value;
     }
-    addToPost(d:DocumentEntity):void {
-        this.documents.push(d);
-    }
+    // addToPost(d:DocumentEntity):void {
+    //     this.documents.push(d);
+    // }
 
   /*  public get getUser():number{
         return this.user;

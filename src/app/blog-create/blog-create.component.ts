@@ -4,7 +4,7 @@ import { BlogService } from '../service/blog-service.service';
 import { BlogEntity } from '../model/blog/blog-entity';
 
 import {from,of,Observable,range, Subscription, fromEvent, interval } from 'rxjs';
-import {map,take,filter, tap,reduce, scan, mapTo} from 'rxjs/operators'
+import {map,take,filter, tap,reduce, scan, mapTo, takeWhile, takeUntil} from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http';
 //import { Api404Error } from '../model/error/base-error';
 @Component({
@@ -31,8 +31,10 @@ calcScrollPercent(element:any):number{
 }
 
 ngOnInit() {  
-
-
+const source$=this.service.add();
+source$.subscribe(value => {
+ console.log(value)
+});
 }
 reverse():void {
   const source$ = from (['1','2','3','4','5']);
@@ -47,12 +49,14 @@ timer():void {
     error:(err :any) => { console.error('error',err); },
     complete :() =>{ console.log('complete'); }
   }
-
+  const abortClick$=fromEvent(document,'click');
   const sourse$=interval(1000);
   const countDown$=sourse$.pipe(
     map( () => -1),
-    scan((acc,value)=> {return (acc+value)},5),
-    filter (value => value >= 0)
+    scan((acc,curr)=> {return (acc+curr)},10),
+
+    takeWhile (value => value >= 0),
+    takeUntil(abortClick$)
   )
 
 

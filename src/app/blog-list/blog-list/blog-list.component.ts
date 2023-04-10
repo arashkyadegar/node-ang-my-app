@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BlogService } from 'src/app/service/blog-service.service';
 import { BlogEntity } from 'src/app/model/blog/blog-entity';
-import { tap, Observable, of, Subscription } from 'rxjs';
+import { takeWhile, Observable, of, map, fromEvent, take, first } from 'rxjs';
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
@@ -16,12 +16,14 @@ export class BlogListComponent {
   }
 
   ngOnInit() {
-          const blogs$=this.blogService.find();    
-          blogs$.subscribe(value => {
-            this.blogList=<Array<BlogEntity>> value;
-          });
+    const blogs$=this.blogService.find();    
+    blogs$.subscribe(value => {
+      this.blogList=<Array<BlogEntity>> value;
+    });
   }
+  loadBlogs():void {
 
+  }
   onDelete(id:string):void{
     console.log("on Delete blogId = " + id)
   }

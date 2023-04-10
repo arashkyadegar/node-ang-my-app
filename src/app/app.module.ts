@@ -9,12 +9,17 @@ import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BlogListComponent } from './blog-list/blog-list/blog-list.component';
+
+import { FileUploadComponent } from './file-upload/file-upload.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     BlogCreateComponent,
     PageNotFoundComponent,
     BlogListComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,

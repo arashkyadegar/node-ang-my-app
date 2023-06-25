@@ -1,17 +1,17 @@
 export interface IUser {
-    id:number;
-    name:string;
+    _id:string;
+    name:string 
 }
 export class UserEntity implements IUser {
-    id: number=0;
-    name: string="";
+    _id: string="0";
+    name:string="" ;
 
 
-    public get getId():number{
-        return this.id;
+    public get getId():string{
+        return this._id;
     }
-    public set setId(value:number) {
-        this.id=value;
+    public set setId(value:string) {
+        this._id=value;
     }
 
     public get getName():string{

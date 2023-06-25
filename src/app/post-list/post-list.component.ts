@@ -1,26 +1,22 @@
 import { Component } from '@angular/core';
-import { BlogService } from 'src/app/service/blog-service.service';
-import { BlogEntity } from 'src/app/model/blog/blog-entity';
-import { takeWhile, Observable, EmptyError, map, fromEvent, take, first, debounceTime, distinctUntilChanged, switchMap, catchError, mergeMap, takeUntil, filter } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { PostService } from 'src/app/service/post-service';
+import { EMPTY, catchError, debounceTime, distinctUntilChanged, filter, fromEvent, map, switchMap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ajax } from 'rxjs/ajax';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
-  selector: 'app-blog-list',
-  templateUrl: './blog-list.component.html',
-  styleUrls: ["../../../../dist/output.css"]
+  selector: 'app-post-list',
+  templateUrl: './post-list.component.html',
+  styleUrls: ['./post-list.component.css']
 })
-export class BlogListComponent {
-  myblogListForm: FormGroup<any>;
-  blogList=new Array(0);
+export class PostListComponent {
+  postList=new Array(0);
   pageNo=0;
   pageIndexCount:any;
-  filter$: any;
-
-  constructor(private blogService:BlogService,private route: ActivatedRoute){
-    myblogListForm: FormGroup<any>;
-    this.myblogListForm = new FormGroup({
+  postListForm: FormGroup<any>;
+  constructor(private service:PostService,private route: ActivatedRoute){
+    postListForm: FormGroup<any>;
+    this.postListForm = new FormGroup({
       srchBoxInput: new FormControl('', [Validators.required]),
       srchBoxBtn:new FormControl('', [Validators.required]),
       shwMoreBtn:new FormControl('', [Validators.required])
@@ -76,46 +72,57 @@ export class BlogListComponent {
           map(() => 
              this.srchBoxInput
           ),
-         filter((value:any) => value.length >=3), // filtering 3 length-values
+       //  filter((value:any) => value.length >=3), // filtering 3 length-values
          distinctUntilChanged(), // filtering duplicate values 
-         switchMap( srch => 
+         switchMap( str => 
               {
+                console.log(str);
                 this.pageNo=0;
-                return this.blogService.search(srch,this.pageNo);
+                return this.service.find(str,this.pageNo);
               }
             )
          
         ).subscribe( (response:any) => {
           console.log(`response ${response}`);
-          this.blogList=response;
-           this.pageNo++;
+          this.postList=response;
+          this.pageNo++;
         }
           )
   }
-  counter(i: number) {
-       return new Array(i);
-  }
   loadBlogs():void {
-    const blogs$=this.blogService.find(this.srchBoxInput,this.pageNo);    
-    blogs$.pipe(
+    const posts$=this.service.find(this.srchBoxInput,this.pageNo);    
+    posts$.pipe(
       //takeWhile((response:any) => response.length >0  )
       )
         .subscribe((response:any) => {
-          console.log(response);
-          let temp=this.blogList;
-          Array.prototype.push.apply(this.blogList,response); 
+          let temp=this.postList;
+          Array.prototype.push.apply(this.postList,response); 
           this.pageNo++;
         }
       );
   }
-  onDelete(id:string):void{
-    console.log("on Delete blogId = " + id)
+  onDelete(id: string): void {
+    const deleteOneSource$=this.service.deleteOne(id);
+    deleteOneSource$.pipe(
+
+    ).subscribe((response: any) => {
+      console.log(response);
+      this.loadBlogs();
+    })
+
   }
-  
-  onEdit(blogId:number):void{
-    //console.log("on Edit blogId = " + blogId)
+  showCommentsDiv():void {
+    const div= document.getElementById('postCommentsDiv') as HTMLElement;;
+    div.classList.remove("invisible");
+  }
+  hideCommentsDiv():void {
+    const div= document.getElementById('postCommentsDiv') as HTMLElement;;
+    div.classList.add("invisible");
+  }
+  onEdit(blogId: number): void {
+    alert("on Edit blogId = " + blogId)
   }
   get srchBoxInput(){
-    return this.myblogListForm.get('srchBoxInput')?.value;
+    return this.postListForm.get('srchBoxInput')?.value;
   }
 }

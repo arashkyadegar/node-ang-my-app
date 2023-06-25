@@ -1,23 +1,24 @@
 import { IPost, PostEntity } from "../post/post-entity";
 
 export interface IDocument {
+    _id:number;
     title:string;
     url:string;
     category:number;
 
 }
 export class DocumentEntity implements IDocument {
-    id: number=0;
+    _id: number=0;
     title: string="";
     url: string="";
     category: number=0;
 
 
     public get getId():number{
-        return this.id;
+        return this._id;
     }
     public set setId(value:number) {
-        this.id=value;
+        this._id=value;
     }
 
     public get getTitle():string{

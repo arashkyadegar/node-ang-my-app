@@ -5,6 +5,7 @@ import { tap, Observable, pipe, Subscription } from "rxjs";
 import { map } from 'rxjs/operators';
 import { UserEntity } from "../model/user/user-entity";
 import { PostEntity } from "../model/post/post-entity";
+import { ajax } from "rxjs/ajax";
 
 @Injectable({
   providedIn: 'root'
@@ -13,27 +14,23 @@ export class BlogService {
   constructor(private http: HttpClient){
 
   }
-   find(): Observable<object> {
+  search(title:string,pageNo:number):Observable<object> {
     let blogs=new Array<BlogEntity>;
-    const source$=  this.http.get('http://localhost:8000/blogs').pipe(
-      tap(// Log the result or error
-      {
-        next: (data) => console.log('next', data),
-        error: (error) => console.error('error', error)
-      })
-    );
+    const source$= this.http.get('http://localhost:8000/blogs/search?title='+title +'&page=' +  pageNo);
+    return source$;
+  }
+   find(title:string,pageNo:number): Observable<object> {
+
+    let blogs=new Array<BlogEntity>;
+    const source$= this.http.get('http://localhost:8000/blogs/search?title='+title +'&page=' +  pageNo);
     return source$;
   }
   edit(blog: BlogEntity,id:number):number {
         throw Error;
   }
   
-  add():Observable<object>  {
+  add(blog:BlogEntity):Observable<object>  {
     //add to db
-    let posts=new Array<PostEntity>;
-    let user=new UserEntity();
-    user.setName="hossein";
-    let blog=new BlogEntity(1,"ashkan",user,"body text",new Date(),1,posts)
     const source$=this.http.post('http://localhost:8000/blogs',blog).pipe(tap(// Log the result or error
     {
       next: (data) => console.log('next', data),

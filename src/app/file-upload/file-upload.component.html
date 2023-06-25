@@ -1,12 +1,25 @@
-<input type="file" class="file-input"
-       (change)="onFileSelected($event)" #fileUpload>
-
-<div class="file-upload">
-
-   {{fileName || "No file uploaded yet."}}
-
-    <button mat-mini-fab color="primary" class="upload-btn"
-      (click)="fileUpload.click()">
-        <a>attach_file</a>
-    </button>
+<form [formGroup]="myUploadForm" (ngSubmit)="submit()" enctype="multipart/form-data" >
+  <div class="form-group" [formGroup]="myUploadForm">
+  <div class="flex flex-col gap-4 w-full  h-72">    
+    <div class="flex">
+      <a  class="w-16">file : </a>
+      <input             
+      formControlName="file"
+      id="file"  name="file"
+      type="file"  class="file-input  rounded-sm pl-2 w-2/4  border border-gray-500 focus:border-0" 
+      (change)="onFileSelected($event)" >
+        {{this.fileName || "No file uploaded yet."}}
+  </div>
+  <div *ngIf="myUploadForm?.invalid && (upload?.dirty || upload?.touched)"
+  class="flex ml-16 text-xl text-red-600" >
+          <div *ngIf="upload?.errors?.['required']">
+              date is required.
+          </div>
+  </div>
+  </div>
+  <div class="flex flex-row-reverse w-2/4 ml-16  gap-2 ">
+    <button class="border  border-blue-600  text-white bg-blue-500 
+    p-2 rounded-md" type="submit" >Submit</button>
 </div>
+  </div>
+  </form>

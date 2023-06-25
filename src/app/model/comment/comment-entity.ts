@@ -1,19 +1,19 @@
 export interface IComment {
-    id:number;
+    _id:number;
     user:number;
-    /*text:string;
+    text:string;
     rate:number;
     isVisible:boolean;
-    date:string;*/
+    date:string
 }
 
 export class CommentEntity implements IComment{
-    id: number=0;
+    _id: number=0;
     user: number=0;
-   /* text: string="";
+    text: string="";
     rate: number=0;
     isVisible: boolean=false;
-    date:string="";*/
+    date:string="";
 
 
 

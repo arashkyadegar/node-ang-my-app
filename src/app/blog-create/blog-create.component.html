@@ -1,10 +1,8 @@
-
-
 <div id="progress-bar" class="fixed bg-pink-500 h-4 top-0 left-0"></div>
 <h1 id="count-down"></h1>
 <form [formGroup]="myBlogForm" (ngSubmit)="submit()">
     <div class="form-group" [formGroup]="myBlogForm">
-    <div class="flex flex-col gap-3 w-full  h-64">    
+    <div class="flex flex-col gap-3 w-full  h-auto">    
         <!-- title -->
         <div class="flex ">
             <a  class="w-16">title : </a>
@@ -22,44 +20,46 @@
                             title is required.
                         </div>
                 </div>
-               <!-- date -->
+                        <!-- author -->
         <div class="flex ">
-            <a  class="w-16">date : </a>
+            <a  class="w-16">author : </a>
             <input 
-            formControlName="date"
-            id="date" 
+            required
+            formControlName="author"
+            id="author" 
             type="text" 
             class="form-control"
-            type="text" value="" placeholder="date" class="rounded-sm pl-2 w-2/4  border border-gray-500 focus:border-0">
+            type="text" value="" placeholder="author" class="rounded-sm pl-2 w-2/4  border border-gray-500 focus:border-0">
         </div>
-            <div *ngIf="myBlogForm?.invalid && (date?.dirty || date?.touched)"
-            class="flex ml-16 text-xl text-red-600" >
-                    <div *ngIf="date?.errors?.['required']">
-                        date is required.
-                    </div>
-            </div>
-          <!-- text -->
+                <div *ngIf="myBlogForm?.invalid && (author?.dirty || author?.touched)"
+                class="flex ml-16 text-xl text-red-600" >
+                        <div *ngIf="author?.errors?.['required']">
+                            author is required.
+                        </div>
+                </div>
+
+          <!-- body -->
         <div class="flex ">
-            <a  class="w-16">text : </a>
+            <a  class="w-16">body : </a>
             <textarea 
-            formControlName="text"
-            id="text" 
+            formControlName="body"
+            id="body" 
             type="text" 
             class="form-control"
-            type="text" value="" placeholder="blog text" class="rounded-sm pl-2 w-2/4  
+            type="text" value="" placeholder="blog body" class="rounded-sm pl-2 w-2/4  
             border border-gray-500 focus:border-0 h-20 resize-none" ></textarea>
         </div>
-        <div *ngIf="myBlogForm?.invalid && (text?.dirty || text?.touched)"
+        <div *ngIf="myBlogForm?.invalid && (body?.dirty || body?.touched)"
         class="flex ml-16 text-xl text-red-600" >
-                <div *ngIf="text?.errors?.['required']">
-                    text is required.
+                <div *ngIf="body?.errors?.['required']">
+                    body is required.
                 </div>
         </div>
       
     
     
     </div>
-    <div class="flex flex-row-reverse w-2/4 ml-16  gap-2 ">
+    <div class="flex flex-row-reverse w-2/4 ml-16 mt-4 gap-2 ">
         <!-- real submit button -->
         <button class="border  border-blue-600  text-white bg-blue-500 
         p-2 rounded-md" type="submit" *ngIf="myBlogForm.valid" >Submit</button>
@@ -75,4 +75,19 @@
         p-2 rounded-md" >Cancel</button>
     </div>
     </div>
-    </form>
+<div>
+    
+</div>
+                 <h1 id="counter"></h1>
+                 <button id="startBtn" class="border  border-yellow-600  text-white bg-blue-500 
+                
+                 p-2 rounded-md">start</button>
+                 <button id="stopBtn" class="border  border-red-600  text-white bg-red-500 
+                
+                 p-2 rounded-md">stop</button>
+                 <button id="pauseBtn" class="border  border-yellow-600  text-white bg-yellow-500 
+                
+                 p-2 rounded-md">pause</button>
+
+</form>
+  

@@ -11,6 +11,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BlogListComponent } from './blog-list/blog-list/blog-list.component';
 
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { PostEditComponent } from './post-edit/post-edit.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { PostCreateComponent } from './post-create/post-create.component';
 
 
 @NgModule({
@@ -20,6 +25,11 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     PageNotFoundComponent,
     BlogListComponent,
     FileUploadComponent,
+    PostListComponent,
+    PostEditComponent,
+    LoginComponent,
+    HomeComponent,
+    PostCreateComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,7 +15,7 @@
 <div class="flex flex-row">
 <div class="border-2 basis-3/4   border-yellow-500  w-9/12 h-96 overflow-y-scroll">
 
-  <table class="text-left text-sm font-light ">
+  <table class="text-left text-sm font-light">
     <thead
       class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
       <tr>
@@ -86,36 +86,36 @@
                 p-1 rounded-md">search</button>
       </div>
     </form>
-<div class="flex flex-col w-11/12  ml-auto mr-auto">
-<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-  <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+<div class="flex flex-col border-2 border-blue-900  ml-auto mr-auto">
+<div class=" sm:-mx-6 lg:-mx-8">
+  <div class="inline-block  py-2 sm:px-6 lg:px-8">
     <div class="overflow-hidden">
-      <table class="min-w-full text-left text-sm font-light">
+      <table class="text-left text-sm font-light">
         <thead
           class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
           <tr>
-            <th scope="col" class="px-6 py-4">#</th>
-            <th scope="col" class="px-6 py-4">Title</th>
-            <th scope="col" class="px-6 py-4">Body</th>
-            <th scope="col" class="px-6 py-4">Rate</th>
-            <th scope="col" class="px-6 py-4">visibility</th>
-            <th scope="col" class="px-6 py-4">actions</th>
+            <th scope="col" class="grid-cols-1 px-6 py-4 w-1/12">#</th>
+            <th scope="col" class="grid-cols-1 px-6 py-4 w-1/12">Title</th>
+            <th scope="col" class="grid-cols-3 overflow-hidden px-6 py-4">Body</th>
+            <th scope="col" class="px-6 py-4 w-1/12">Rate</th>
+            <th scope="col" class="px-6 py-4 w-1/12">visibility</th>
+            <th scope="col" class="px-6 py-4 w-1/12">actions</th>
 
           </tr>
         </thead>
 
 
         
-        <tbody>
+        <tbody class="grid">
           <tr   *ngFor="let post of postList;let indexOfelement=index;"
           [ngClass]="indexOfelement % 2 ==0 ? 'bg-neutral-100' : 'bg-white'"
           class=" transition  ease-in duration-300 h-5 border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-              <td class="whitespace-nowrap px-6 py-4 font-medium">{{post._id.toString().substring(0,3)}}</td>
-              <td class="whitespace-nowrap px-6 py-4">{{post.title}}</td>
-              <td class="whitespace-nowrap px-6 py-4">{{post.body}}</td>
-              <td class="whitespace-nowrap px-6 py-4">{{post.rate}}</td>
-              <td class="whitespace-nowrap px-6 py-4">{{post.isVisible}}</td>
-              <td class="whitespace-nowrap px-6 py-4 gap-2 flex">
+              <td class="whitespace-nowrap grid-cols-1 px-6 py-1 font-medium">{{post._id.toString().substring(0,3)}}</td>
+              <td class="whitespace-nowrap grid-cols-2 px-6 py-1">{{post.title}}</td>
+              <td class="whitespace-nowrap grid-cols-8 px-6 py-1">{{post.body}}</td>
+              <td class="whitespace-nowrap px-6 py-1">{{post.rate}}</td>
+              <td class="whitespace-nowrap px-6 py-1">{{post.isVisible}}</td>
+              <td class="whitespace-nowrap px-6 py-1 gap-2 flex">
                   <button class="bg-red-600 text-white font-bold p-1 rounded-md"
                      (click)="onDelete(post._id.toString())">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

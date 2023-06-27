@@ -25,6 +25,7 @@ export class PostListComponent {
   }
 
   ngOnInit() {
+    this.handleCommentTab();
     this.loadBlogs();
 
     //observable from scroll event
@@ -89,6 +90,52 @@ export class PostListComponent {
         }
           )
   }
+  handleCommentTab() {
+    //elems
+    const commentsDetailOverviewDiv = document.getElementById('comments-detail-overview-div') as HTMLElement;
+    const commentsListOverviewDiv =  document.getElementById('comments-list-overview-div') as HTMLElement;
+    const commentsListTab = document.getElementById('comments-list-tab') as HTMLElement;
+    const commentsDetailstTab = document.getElementById('comments-details-tab') as HTMLElement;
+
+    //sources
+  const  commentsListTab$ = fromEvent(commentsListTab,'click');
+  const commentsDetailstTab$ = fromEvent(commentsDetailstTab,'click');
+
+commentsListTab$.pipe(
+  map( () => 
+  {
+    commentsListOverviewDiv.classList.remove('hidden');
+    commentsDetailOverviewDiv.classList.add('hidden');
+
+    commentsListTab.classList.remove("border-white");
+    commentsListTab.classList.remove("border");
+
+    commentsDetailstTab.classList.add("border");
+    commentsDetailstTab.classList.add("border-black");
+
+return
+  }
+  )
+)
+.subscribe();
+
+
+
+commentsDetailstTab$.pipe(
+  map( () => 
+  {
+    commentsDetailOverviewDiv.classList.remove('hidden');
+    commentsListOverviewDiv.classList.add('hidden');
+    commentsDetailstTab.classList.remove("border-white");
+    commentsDetailstTab.classList.remove("border");
+
+    commentsListTab.classList.add("border");
+    return commentsListTab.classList.add("border-black");
+  }
+  )
+)
+.subscribe();
+  }
   loadBlogs():void {
     const posts$=this.service.find(this.srchBoxInput,this.pageNo);    
     posts$.pipe(
@@ -116,6 +163,8 @@ export class PostListComponent {
     div.classList.remove("invisible");
   }
   hideCommentsDiv():void {
+
+
     const div= document.getElementById('postCommentsDiv') as HTMLElement;;
     div.classList.add("invisible");
   }

@@ -10,7 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent {
-  postList=new Array(0);
+  postList = new Array(0);
+  commentList = new Array(0);
   pageNo=0;
   pageIndexCount:any;
   postListForm: FormGroup<any>;
@@ -106,13 +107,10 @@ commentsListTab$.pipe(
   {
     commentsListOverviewDiv.classList.remove('hidden');
     commentsDetailOverviewDiv.classList.add('hidden');
-
     commentsListTab.classList.remove("border-white");
     commentsListTab.classList.remove("border");
-
     commentsDetailstTab.classList.add("border");
     commentsDetailstTab.classList.add("border-black");
-
 return
   }
   )
@@ -128,7 +126,6 @@ commentsDetailstTab$.pipe(
     commentsListOverviewDiv.classList.add('hidden');
     commentsDetailstTab.classList.remove("border-white");
     commentsDetailstTab.classList.remove("border");
-
     commentsListTab.classList.add("border");
     return commentsListTab.classList.add("border-black");
   }
@@ -137,14 +134,14 @@ commentsDetailstTab$.pipe(
 .subscribe();
   }
   loadBlogs():void {
-    const posts$=this.service.find(this.srchBoxInput,this.pageNo);    
+    const posts$ = this.service.find(this.srchBoxInput,this.pageNo);    
     posts$.pipe(
       //takeWhile((response:any) => response.length >0  )
       )
-        .subscribe((response:any) => {
-          let temp=this.postList;
+        .subscribe((response: any) => {
+          let temp = this.postList;
           Array.prototype.push.apply(this.postList,response); 
-          this.pageNo++;
+          this.pageNo ++;
         }
       );
   }
@@ -158,14 +155,24 @@ commentsDetailstTab$.pipe(
     })
 
   }
-  showCommentsDiv():void {
-    const div= document.getElementById('postCommentsDiv') as HTMLElement;;
+  showCommentsDiv(postId:any): void {
+    const findOneSource$=this.service.findOne(postId);
+    findOneSource$.pipe(
+      map((reponse:any) => 
+        reponse.comments
+      )
+    ).subscribe((comments: any) => {
+      this.commentList = comments;
+    })
+
+
+    const div= document.getElementById('postCommentsDiv') as HTMLElement;
     div.classList.remove("invisible");
   }
-  hideCommentsDiv():void {
+  hideCommentsDiv(): void {
 
 
-    const div= document.getElementById('postCommentsDiv') as HTMLElement;;
+    const div= document.getElementById('postCommentsDiv') as HTMLElement;
     div.classList.add("invisible");
   }
   onEdit(blogId: number): void {

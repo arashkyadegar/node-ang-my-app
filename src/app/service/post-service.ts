@@ -10,6 +10,23 @@ import { PostEntity } from "../model/post/post-entity";
   })
 export class PostService {
 
+  advanceSearch(title: string, pageNo: number, isVisible: boolean): any {
+    let url = `http://localhost:8000/posts/search?title=${title}&page=${pageNo}&visible=${isVisible}`;
+    //const source$= this.http.get('http://localhost:8000/blogs/search?title='+title +'&page=' +  pageNo);
+
+    const source$=  this.http.get(url).pipe(
+    );
+    return source$;
+  }
+  search(title: string, pageNo: number, isVisible: boolean): any {
+    let url = `http://localhost:8000/posts/search?title=${title}&page=${pageNo}&visible=${isVisible}`;
+    //const source$= this.http.get('http://localhost:8000/blogs/search?title='+title +'&page=' +  pageNo);
+
+    const source$=  this.http.get(url).pipe(
+    );
+    return source$;
+  }
+
     constructor(private http: HttpClient){
 
     }
@@ -25,8 +42,8 @@ export class PostService {
       );
       return source$;
     }
-    find(title:string,pageNo:number): Observable<object> {
-      let url = `http://localhost:8000/posts/?title=${title}&page=${pageNo}`;
+    find(pageNo: number): Observable<object> {
+      let url = `http://localhost:8000/posts/?page=${pageNo}`;
       //const source$= this.http.get('http://localhost:8000/blogs/search?title='+title +'&page=' +  pageNo);
 
       const source$=  this.http.get(url).pipe(

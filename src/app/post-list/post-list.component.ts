@@ -20,7 +20,9 @@ export class PostListComponent {
     this.postListForm = new FormGroup({
       srchBoxInput: new FormControl('', [Validators.required]),
       srchBoxBtn:new FormControl('', [Validators.required]),
-      shwMoreBtn:new FormControl('', [Validators.required])
+      shwMoreBtn:new FormControl('', [Validators.required]),
+      srchBoxrateInput: new FormControl('', [Validators.required]),
+      srchBoxIsVisibleChBox: new FormControl('', [Validators.required])
   });
 
   }
@@ -28,7 +30,7 @@ export class PostListComponent {
   ngOnInit() {
     this.handleCommentTab();
     this.loadBlogs();
-
+    this.handleAdvanceSearch();
     //observable from scroll event
     const shwMoreBtn=document.getElementById("shwMoreBtn") as HTMLElement;
     const shwMoreBtn$=fromEvent(shwMoreBtn,'click');
@@ -67,7 +69,7 @@ export class PostListComponent {
 
         ///elems
         const searchBtn=document.getElementById('srchBoxBtn') as HTMLElement;
-
+        const isVisibleChbox = document.getElementById('srchbox-is-visible-chbox') as HTMLInputElement;
         //observable from event
         const searchBtn$=fromEvent(searchBtn,'click');
         searchBtn$.pipe(
@@ -80,7 +82,7 @@ export class PostListComponent {
               {
                 console.log(str);
                 this.pageNo=0;
-                return this.service.find(str,this.pageNo);
+                return this.service.search(str,this.pageNo,isVisibleChbox.checked);
               }
             )
          
@@ -134,7 +136,15 @@ commentsDetailstTab$.pipe(
 .subscribe();
   }
   loadBlogs():void {
-    const posts$ = this.service.find(this.srchBoxInput,this.pageNo);    
+    const title = this.srchBoxInput;
+    let posts$;
+    
+    if(title != ''){
+       posts$ = this.service.search(title,this.pageNo,false);
+    }else{
+       posts$ = this.service.find(this.pageNo);   
+    }
+ 
     posts$.pipe(
       //takeWhile((response:any) => response.length >0  )
       )
@@ -178,7 +188,14 @@ commentsDetailstTab$.pipe(
   onEdit(blogId: number): void {
     alert("on Edit blogId = " + blogId)
   }
+  handleAdvanceSearch():void {
+    const advSrchBoxBtn=document.getElementById("adv-srchBox-Btn") as HTMLElement;
+    const click$=fromEvent(advSrchBoxBtn,'click');
+
+    click$.subscribe(() => console.log('click'));
+  }
   get srchBoxInput(){
     return this.postListForm.get('srchBoxInput')?.value;
   }
+
 }

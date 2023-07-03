@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { List } from 'lodash';
-import { EMPTY, catchError, debounceTime, distinctUntilChanged, fromEvent, map, switchMap } from 'rxjs';
+import { EMPTY, Observable, catchError, debounceTime, distinctUntilChanged, fromEvent, map, switchMap } from 'rxjs';
 import { PostService } from '../service/post-service';
 import { PostEntity } from '../model/post/post-entity';
 import { UserEntity } from '../model/user/user-entity';
@@ -35,7 +35,7 @@ ngOnInit() {
     const bodyTxt = document.getElementById('body-txt') as HTMLInputElement;
     const visibleChbox = document.getElementById('is-visible') as HTMLInputElement;
     const createPostSubmitBtn = document.getElementById('create-post-submit-btn') as HTMLElement;
-    const errorBoxDiv=document.getElementById('errorBoxDiv') as HTMLElement;
+
         //source
         const createSubmit$ = fromEvent(createPostSubmitBtn,'click');
 
@@ -50,33 +50,32 @@ ngOnInit() {
               return x;
             }
             ),debounceTime(1000),
-    
-          // distinctUntilChanged((pre,curr) => {
-          //   if(pre.name == curr.name && pre.password == curr.password)
-          //   return true;
-          //   return false;
-          // }),
           switchMap( (params)=> {
              return this.service.add(params)
               .pipe (
                 catchError(err => {
-                  errorBoxDiv.classList.remove("invisible");
-                  switch (err.status) {
-                    default:
-                        errorBoxDiv.innerHTML='<p>smth wrong happend.</p>';
+                 return this.handleErrorBox(err)
                   }
-                  return EMPTY;
-                })
+                )
               )
           })
           ).subscribe(console.log)
 
   }
+  handleErrorBox(err: any): Observable<any> {
+    const errorBoxDiv=document.getElementById('errorBoxDiv') as HTMLElement;
+    errorBoxDiv.classList.remove("invisible");
+    switch (err.status) {
+      default:
+          errorBoxDiv.innerHTML='<p>smth wrong happend.</p>';
+    }
+    return EMPTY;
+  }
   handleLinks() {
       //elems
   const linkInput=document.getElementById('link-txt') as HTMLElement;
   const linkAddBtn = document.getElementById('link-add-btn') as HTMLElement ;
-  const linksContainerDiv = document.getElementById('links-container-div') as HTMLElement ;
+
 
     //source
     const linkAddBtn$ = fromEvent(linkAddBtn,'click');
@@ -88,27 +87,38 @@ ngOnInit() {
     }),distinctUntilChanged()
     )
     .subscribe((value:any) => {
-      let str = `${value}`;
-      console.log(str);
-      this.links.push(str);
-      this.link = "";
-      
-      linksContainerDiv.innerHTML =  linksContainerDiv.innerHTML +'<div class="flex border border-gray-200 items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">'+
-      '<div class="ml-4 flex min-w-0 flex-1 gap-2">'+
-        '<span class="truncate font-medium">'+str+'</span>'+
-
-      '</div>'+
-    '<div class="ml-4 flex-shrink-0">'+
-      '<a href="#" class="font-medium text-red-600 hover:text-red-500">حذف</a>'+
-    '</div>'+
-  '</div>'
+      this.addItemsToLinksArray(value);
+      this.addItemsToLinksDiv(value);
+      this.resetLinkInput();
     });
+  }
+  resetLinkInput(): void {
+    this.link = "";
+  }
+  addItemsToLinksArray(value :any): void {
+    let str = `${value}`;
+    console.log(str);
+    this.links.push(str);
+  }
+  addItemsToLinksDiv(item :string): void {
+    const linksContainerDiv = document.getElementById('links-container-div') as HTMLElement ;
+    linksContainerDiv.innerHTML =  linksContainerDiv.innerHTML + 
+      '<div class="flex border border-gray-200 items-center justify-between'+ 
+      'py-4 pl-4 pr-5 text-sm leading-6">'+
+      '<div class="ml-4 flex min-w-0 flex-1 gap-2">' +
+      '<span class="truncate font-medium">'+ item +'</span>' +
+      '</div>'+
+      '<div class="ml-4 flex-shrink-0">'+
+      '<a href="#" class="font-medium text-red-600 hover:text-red-500">حذف</a>'+
+      '</div>'+
+      '</div>'
+
   }
   handleTags() {
       //elems
   const tagInput = document.getElementById('tag-txt') as HTMLElement;
   const tagAddbtn = document.getElementById('tag-add-btn') as HTMLElement;
-  const tagContainerDiv = document.getElementById('tags-container-div') as HTMLElement;
+
 
   //source
   const tagAddbtn$=fromEvent(tagAddbtn,'click');
@@ -120,11 +130,27 @@ ngOnInit() {
   }),distinctUntilChanged()
   )
   .subscribe((value:any) => {
-    let str = `#${value}`
-    this.tags.push(str);
-    this.tag = "";
-    tagContainerDiv.innerHTML = tagContainerDiv.innerHTML + '<span class="inline-flex items-center rounded-md h-10 m-1 bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">'+str+'</span>';
+
+    this.addItemsToTagsArray(value);
+    this.addItemsToTagsDiv(value)
+    this.resetTagInput();
+
   });
+  }
+  resetTagInput(): void {
+    this.tag = "";
+  }
+  addItemsToTagsArray(value :any): void {
+
+    let str = `#${value}`;
+    this.tags.push(str);
+  }
+  addItemsToTagsDiv(item :string): void {
+    const tagContainerDiv = document.getElementById('tags-container-div') as HTMLElement;
+
+    tagContainerDiv.innerHTML = tagContainerDiv.innerHTML + 
+    '<span class="inline-flex items-center rounded-md h-10 m-1 bg-blue-50 px-2 py-1' +
+    'text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">'+ item +'</span>';
   }
 get title() {
   return this.postCreateFrm.get('titleTxt');

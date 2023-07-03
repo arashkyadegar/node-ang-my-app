@@ -119,20 +119,47 @@
 </div>
     <!-- search input -->
     <form [formGroup]="postListForm">
-      <div class="flex">
-        <input 
-        required
-        formControlName="srchBoxInput"
-        id="srchBoxInput" 
-        type="text" 
-        class="form-control"
-        type="text" value="" placeholder="search in title..." class=" rounded-sm pl-2 w-1/4  border border-gray-500 focus:border-0">
-                <!-- search button -->
-                <button     
-                id="srchBoxBtn" name="srchBoxBtn" value="search"
+      <div class="flex flex-col">
+        <div class="w-3/5 ">
+              <input 
+              required
+              formControlName="srchBoxInput"
+              id="srchBoxInput" 
+              type="text" 
+              class="form-control"
+              type="text" value="" placeholder="search in title..." class=" rounded-sm pl-2 w-3/5  border border-gray-500 focus:border-0">
+              <!-- search button -->
+              <button     
+              id="srchBoxBtn" name="srchBoxBtn" value="search"
+              class="border  border-blue-600  text-white bg-blue-500 
+              p-1 rounded-md">جستجو</button>
+              </div>
+              
+                  <div class="w-1/5 ">
+                  <input id="srchbox-is-visible-chbox"
+                  formControlName="srchBoxIsVisibleChBox"
+                   type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+            
+                  <label for="comments" class="font-medium text-gray-900">قابلیت نمایش</label>
+                </div>
+              
+                <div>
+                  <input id="srchbox-rate-input"
+                    formControlName="srchBoxrateInput" min="0" max="5"
+                   type="number" >
+            
+                  <label for="comments" class="font-medium text-gray-900">امتیاز</label>
+        
+                </div>
+                <div>
+                  <button     
+                  id="adv-srchBox-Btn" name="advSrchBoxBtn" value="search"
                   class="border  border-blue-600  text-white bg-blue-500 
-                p-1 rounded-md">search</button>
-      </div>
+                  p-1 rounded-md">جستجو پیشرفته</button>
+                </div>
+              </div>     
+        
+
     </form>
 <div class="flex flex-col border-2 border-blue-900  ml-auto mr-auto">
 <div class=" sm:-mx-6 lg:-mx-8">

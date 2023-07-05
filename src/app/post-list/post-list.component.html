@@ -3,13 +3,13 @@
 
 <div class="rtl">
 <div class="flex-col items-center justify-center  relative ">
-  <div id="postCommentsDiv" class="invisible w-8/12 h-96  absolute border-2 border-gray-800 shadow-2xl
+  <div id="post-cmnts-Div" class="invisible w-8/12 h-96  fixed border-2 border-gray-800 shadow-2xl
   bg-white">
 
   <div class=" flex-col w-full  ">
         <div class="flex flex-row ">
-            <div id="comments-list-tab" class="border-t-0 border-r-0 cursor-pointer w-32 p-2  border border-black text-center" ><a> نظرات</a></div>
-            <div id="comments-details-tab" class="border-t-0 border-l-0 cursor-pointer w-32  p-2 border border-black text-center"><a>جزيیات</a></div>
+            <div id="cmnts-list-tab" class="border-t-0 border-r-0 cursor-pointer w-32 p-2  border border-black text-center" ><a> نظرات</a></div>
+            <div id="cmnts-detail-tab" class="border-t-0 border-l-0 cursor-pointer w-32  p-2 border border-black text-center"><a>جزيیات</a></div>
             <div class=" w-full  border-b border-r border-black  p-2">
               <div (click)="hideCommentsDiv()" class="  w-7 float-left  inline-block">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -21,7 +21,7 @@
           </div>
   </div>
 
-<div id="comments-list-overview-div" class=" flex flex-row basis-4  w-11/12 mr-6 mt-2 h-72 overflow-y-scroll">
+<div id="cmnts-list-div" class=" flex flex-row basis-4  w-11/12 mr-6 mt-2 h-72 overflow-y-scroll">
 
 <table class=" text-sm font-light text-right  w-full">
     <thead
@@ -66,7 +66,7 @@
   </table> 
 </div>
 
-<div id="comments-detail-overview-div" class="hidden basis-4 w-11/12  h-72 p-5">
+<div id="cmnts-detail-div" class="hidden basis-4 w-11/12  h-72 p-5">
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">

@@ -10,8 +10,12 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 
-const routes: Routes = [
+import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoComponent } from './socket-io/socket-io.component';
 
+
+const routes: Routes = [
+  { path: 'socket', component: SocketIoComponent},
   { path: 'blog', component: BlogCreateComponent },
   { path: 'blogs', component: BlogListComponent ,
   children: [
@@ -19,7 +23,7 @@ const routes: Routes = [
       path: '?page=', // child route path
       component: BlogListComponent, // child route component that the router renders
     }
-  ],},
+  ],}, 
   { path: 'files', component: FileUploadComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
@@ -32,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [SocketIoModule,RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

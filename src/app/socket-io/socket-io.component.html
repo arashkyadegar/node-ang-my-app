@@ -1,0 +1,31 @@
+<div id="errorBoxDiv" class="border-2 border-red-500 invisible
+ bg-red-300 rounded-md w-3/4 ml-auto mr-auto mb-10
+p-5"></div>
+<form [formGroup]="postCreateFrm" >
+  <div class=" rtl">
+
+    <div class="border-b border-gray-900/10 pb-12">
+
+        <div class="col-span-full">
+          <label for="about" class="block text-sm font-medium leading-6 text-gray-900">متن</label>
+
+            <textarea id="body-txt" name="body-txt" formControlName="bodyTxt" rows="3" class="pr-2  block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+            <div *ngIf="postCreateFrm?.invalid && (body?.dirty || body?.touched)"
+            class="flex ml-16 text-xs text-red-600" >
+                    <div *ngIf="body?.errors?.['required']">
+                        لطفامتن  را پر کنید
+                    </div>
+            </div>
+
+          <p class="mt-3 text-sm leading-6 text-gray-600"></p>
+        </div>
+
+    </div>
+  </div>
+  <div class=" flex items-center justify-end gap-x-6">
+    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+    <button type="submit" id="create-post-submit-btn" class="rounded-md bg-indigo-600 px-3 py-2 text-sm 
+    font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 
+    focus-visible:outline-offset-2 focus-visible:outline-indigo-600">ثبت</button>
+  </div>
+</form>

@@ -16,7 +16,10 @@ import { PostEditComponent } from './post-edit/post-edit.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PostCreateComponent } from './post-create/post-create.component';
+import { SocketIoComponent } from './socket-io/socket-io.component';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
   declarations: [
@@ -30,13 +33,15 @@ import { PostCreateComponent } from './post-create/post-create.component';
     LoginComponent,
     HomeComponent,
     PostCreateComponent,
+    SocketIoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

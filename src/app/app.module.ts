@@ -19,7 +19,7 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import { SocketIoComponent } from './socket-io/socket-io.component';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
   declarations: [
@@ -40,8 +40,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    SocketIoModule.forRoot(config)
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

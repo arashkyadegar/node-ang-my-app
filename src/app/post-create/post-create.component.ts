@@ -115,15 +115,8 @@ ngOnInit() {
   addItemsToLinksDiv(item :string): void {
     const linksContainerDiv = document.getElementById('links-container-div') as HTMLElement ;
     linksContainerDiv.innerHTML = linksContainerDiv.innerHTML + 
-      '<div class="flex border border-gray-200 items-center justify-between'+ 
-      'py-4 pl-4 pr-5 text-sm leading-6">'+
-      '<div class="ml-4 flex min-w-0 flex-1 gap-2">' +
-      '<span class="truncate font-medium">'+ item +'</span>' +
-      '</div>'+
-      '<div class="ml-4 flex-shrink-0">'+
-      '<a href="#" class="font-medium text-red-600 hover:text-red-500">حذف</a>'+
-      '</div>'+
-      '</div>'
+    '<span class="inline-flex items-center rounded-md h-10 m-1 bg-blue-50 px-2 py-1' +
+    'text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">'+ item +'</span>';
   }
 
 

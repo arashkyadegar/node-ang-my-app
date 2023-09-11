@@ -1,122 +1,116 @@
-<div id="errorBoxDiv" class="border-2 border-red-500 invisible
- bg-red-300 rounded-md w-3/4 ml-auto mr-auto mb-10
+<div class="container  ">
+<div id="errorBoxDiv" class=" hidden
+ bg-red-300 rounded-md w-3/4 ml-auto mr-auto 
 p-5"></div>
 <form [formGroup]="postCreateFrm" >
-  <div class="space-y-12 rtl">
+  <div class="rtl">
 
-    <div class="border-b border-gray-900/10 pb-12">
+    <div class=" grid  grid-cols-2  w-full">
 
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-      <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+        <div class="col-span-1  ">
 
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
-          <label for="title" class="block text-sm font-medium leading-6 text-gray-900">عنوان</label>
-          <div class="mt-2">
-            <input type="text" name="title-txt" id="title-txt" formControlName="titleTxt" autocomplete="given-name" class="pr-2 block w-6/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-             placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm
-              sm:leading-6">
+          <div class="flex w-full  gap-x-2 ">
+            <div >
+            <label for="title" class="float-right pl-4">عنوان</label>
+            </div>
+            <div class="w-full">
+            <input type="text" name="title-txt" id="title-txt" formControlName="titleTxt" autocomplete="given-name" class="w-10/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
+              placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm
+              sm:leading-6 ">
             <div *ngIf="postCreateFrm?.invalid && (title?.dirty || title?.touched)"
-            class="flex ml-16 text-xs text-red-600" >
+            class="flex text-xs text-red-600" >
                     <div *ngIf="title?.errors?.['required']">
                         لطفا فیلد عنوان را پر کنید
                     </div>
             </div>
+            </div>
           </div>
         </div>
-        <div class="block sm:col-span-12">
-          <label for="last-name" class=" text-sm font-medium leading-6 text-gray-900">برچسب ها</label>
-          <div class="mt-2">
-            <input type="text" name="tag-txt" id="tag-txt" formControlName="tagTxt" autocomplete="family-name" class="pr-2  inline-block w-3/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            <button type="button" id="tag-add-btn"  class=" mr-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">+</button>
+        <div class="col-span-1 ">
+          <div class="relative flex gap-x-3">
+            <div class="flex h-6 items-center">
+            <input id="is-visible" name="visibile-chbox" type="checkbox" class="h-4 basis-2/4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+            </div>
+            <div class="text-sm leading-6">
+            <label for="comments" class="font-medium text-gray-900">قابلیت نمایش</label>
+            </div>
+        
+        
+            </div> 
+
+
+        </div>
+        <div class="col-span-1 row-span-5 ">
+          <div class="   gap-x-2 mt-5 ">
+          <div >
+          <label for="about" class="float-right text-sm font-medium leading-6 text-gray-900 pl-9">متن</label>
+          </div>
+          <div class="basis-1/3">
+          <textarea id="body-txt" name="body-txt" formControlName="bodyTxt" rows="12" class="pr-2  block w-9/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+          <div *ngIf="postCreateFrm?.invalid && (body?.dirty || body?.touched)"
+          class="flex ml-16 text-xs text-red-600" >
+                  <div *ngIf="body?.errors?.['required']">
+                      لطفامتن  را پر کنید
+                  </div>
+          </div>
+          </div>
+          <p class="mt-3 text-sm leading-6 text-gray-600"></p>
+          </div></div>
+        <div class="col-span-1 mt-5">
+  
+        
+            <div class="w-full ">
+                  <label for="last-name" class="float-right">برچسب </label>
+            </div>
+            <div class="">
+            <input type="text" name="tag-txt" id="tag-txt" formControlName="tagTxt" autocomplete="family-name" class="pr-4 mr-2 w-8/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <button type="button" id="tag-add-btn"  class="mr-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">+</button>
             <div *ngIf="postCreateFrm?.invalid && (tag?.dirty || tag?.touched)"
             class="flex ml-16 text-xs text-red-600" >
                     <div *ngIf="tag?.errors?.['required']">
                         لطفا فیلد تگ را پر کنید
                     </div>
             </div>
-          </div>
-          <div id="tags-container-div">
-          <span class="inline-flex items-center rounded-md h-10 m-1 bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">تیمـفوتبالـپرسپولیس</span>
-
-          <span class="inline-flex items-center rounded-md h-10 m-1 bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Badge</span>
-
-          <span class="inline-flex items-center rounded-md h-10 m-1 bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Badge</span>
-        </div>
-        </div>
-
-        <div class="col-span-full">
-          <label for="about" class="block text-sm font-medium leading-6 text-gray-900">متن</label>
-          <div class="mt-2">
-            <textarea id="body-txt" name="body-txt" formControlName="bodyTxt" rows="3" class="pr-2  block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-            <div *ngIf="postCreateFrm?.invalid && (body?.dirty || body?.touched)"
-            class="flex ml-16 text-xs text-red-600" >
-                    <div *ngIf="body?.errors?.['required']">
-                        لطفامتن  را پر کنید
-                    </div>
+            </div>
+        
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <div id="tags-container-div" role="list" class="mr-10 border-2 border-red-200 divide-y  rounded-md overflow-y-auto">
+        
+              </div>
             </div>
           </div>
-          <p class="mt-3 text-sm leading-6 text-gray-600"></p>
         </div>
-        <div class="col-span-full">
-        <fieldset>
+        
 
-
-            <div class="relative flex gap-x-3">
-              <div class="flex h-6 items-center">
-                <input id="is-visible" name="visibile-chbox" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-              </div>
-              <div class="text-sm leading-6">
-                <label for="comments" class="font-medium text-gray-900">قابلیت نمایش</label>
-                <p class="text-gray-500">در صورت فعال بودن پست شما نمایش داده میشود</p>
-              </div>
-
-<span class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10">Badge</span>
+        <div class="col-span-1 ">
+            
+      <div class="flex  gap-x-2 mb-10">
+        <div >
+        <label for="last-name" class="" >لینکها  </label>
+        </div>
+        <div class="w-full ">
+        <input type="text" name="linkTxt" id="link-txt" formControlName="linkTxt" autocomplete="given-name" class="pr-4 mr-2 w-9/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <button type="button" id="link-add-btn" class=" mr-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">+</button>
+    
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    
+        <div class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+          <div id="links-container-div" role="list" class="border-2 border-red-200  divide-y  rounded-md overflow-y-auto">
+    
           </div>
-        </fieldset>
-      </div>
-    </div>
-   <div class="mt-8 border-t border-gray-200 pt-8">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">لینک ها</h2>
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
-          <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">آدرس لینک</label>
-          <div class="mt-2">
-            <input type="text" name="linkTxt" id="link-txt" formControlName="linkTxt" autocomplete="given-name" class="pr-2  w-2/3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            <button type="button" id="link-add-btn" class=" mr-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">+</button>
-          </div>
-          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-
-            <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <div id="links-container-div" role="list" class="divide-y  rounded-md overflow-y-auto">
-
-                <!-- <div class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                    <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span class="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                      <span class="flex-shrink-0 text-gray-400">4.5mb</span>
-                    </div>
-                  <div class="ml-4 flex-shrink-0">
-                    <a href="#" class="font-medium text-red-600 hover:text-red-500">حذف</a>
-                  </div>
-                </div> -->
-                <!-- <div class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                  <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span class="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                    <span class="flex-shrink-0 text-gray-400">4.5mb</span>
-                  </div>
-                <div class="ml-4 flex-shrink-0">
-                  <a href="#" class="font-medium text-red-600 hover:text-red-500">حذف</a>
-                </div>
-              </div> -->
-              </div>
-            </dd>
-          </div>
+        </div>
+        </div>
+    
+        </div>
+    
+        </div>
         </div>
       </div>
 
-    </div>
+
+
       </div>
-    </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
     <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
@@ -125,3 +119,4 @@ p-5"></div>
     focus-visible:outline-offset-2 focus-visible:outline-indigo-600">ثبت</button>
   </div>
 </form>
+</div>

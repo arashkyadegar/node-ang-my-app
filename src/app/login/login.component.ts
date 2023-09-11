@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../service/login.service';
 import {EMPTY, catchError, debounceTime, distinctUntilChanged, empty, fromEvent, map, mergeMap, of, switchMap, tap} from 'rxjs';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { values } from 'lodash';
-import {CookieService} from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -13,7 +12,7 @@ import {CookieService} from 'ngx-cookie-service';
 export class LoginComponent {
   cookieValue: any;
 
-  constructor(private service :LoginService,private cookieService:CookieService){};
+  constructor(private service :LoginService, private router: Router){};
   ngOnInit() {  
     //ids in html must contains - sample : login-submit in html and loginSubmit in js
     //elems
@@ -26,17 +25,17 @@ export class LoginComponent {
     //source
     const loginSubmit$=fromEvent(loginSubmitBtn,'click');
     loginSubmit$.pipe(
-      debounceTime(1000),
+     debounceTime(1000),
       map(()=> 
         ({name: nameTxt.value,
         password:passwordTxt.value,
         rememberUser:rememberChbox.checked})),
 
-      distinctUntilChanged((pre,curr) => {
-        if(pre.name == curr.name && pre.password == curr.password)
-        return true;
-        return false;
-      }),
+      // distinctUntilChanged((pre,curr) => {
+      //   if(pre.name == curr.name && pre.password == curr.password)
+      //   return true;
+      //   return false;
+      // }),
       switchMap( (params)=> {
          return this.service.login(params.name,params.password,params.rememberUser)
           .pipe (
@@ -55,10 +54,12 @@ export class LoginComponent {
       })
       )
       .subscribe((rslt:any) => {
-        this.cookieValue = this.cookieService.get('user-cookie'); // To Get Cookie
+       let redirectDelay =  setInterval(()=> {
+          clearInterval(redirectDelay);
+          this.router.navigate(['/home']);
+        },1000)
+
         errorBoxDiv.classList.add("invisible");
-        console.log(`successful ${rslt.name}`);
-        console.log(`token ${rslt.token}`);
       })
     }
   submit() {}

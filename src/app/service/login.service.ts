@@ -13,11 +13,11 @@ export class LoginService {
     let url = 'http://localhost:8000/auth/login/';
     const source$=  this.http.post<any>(url,{name:_name,password:_password,remember:_remember})
     .pipe(
-      // tap(// Log the result or error
-      // {
-      //   next: (data) => console.log('next', data),
-      //   error: (error) => console.error('error', error)
-      // })
+      tap(// Log the result or error
+      {
+        next: (data) => console.log('next', data),
+        error: (error) => console.error('error', error)
+      })
     )
     return source$;
   }

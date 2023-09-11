@@ -29,7 +29,6 @@ export class PostEntity implements IPost {
     isVisible: boolean=false;
     tags:  string[];
     links: string[];
-
     comments:Array<CommentEntity>=[];
     documents: any;
 

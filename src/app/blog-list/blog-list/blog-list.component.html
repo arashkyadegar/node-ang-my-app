@@ -1,23 +1,24 @@
 
-    <!-- search input -->
-    <form [formGroup]="myblogListForm">
-          <div class="flex ">
 
-            <input 
-            required
-            formControlName="srchBoxInput"
-            id="srchBoxInput" 
-            type="text" 
-            class="form-control"
-            type="text" value="" placeholder="search in title..." class=" rounded-sm pl-2 w-1/4  border border-gray-500 focus:border-0">
-                    <!-- search button -->
-                    <button     
-                    id="srchBoxBtn" name="srchBoxBtn" value="search"
-                      class="border  border-blue-600  text-white bg-blue-500 
-                    p-1 rounded-md">search</button>
-          </div>
-        </form>
 <div class="flex flex-col w-11/12  ml-auto mr-auto">
+      <!-- search input -->
+      <form [formGroup]="myblogListForm">
+        <div class="flex ">
+
+          <input 
+          required
+          formControlName="srchBoxInput"
+          id="srchBoxInput" 
+          type="text" 
+          class="form-control"
+          type="text" value="" placeholder="search in title..." class=" rounded-sm pl-2 w-1/4  border border-gray-500 focus:border-0">
+                  <!-- search button -->
+                  <button     
+                  id="srchBoxBtn" name="srchBoxBtn" value="search"
+                    class="border  border-blue-600  text-white bg-blue-500 
+                  p-1 rounded-md">search</button>
+        </div>
+      </form>
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
         <div class="overflow-hidden">
